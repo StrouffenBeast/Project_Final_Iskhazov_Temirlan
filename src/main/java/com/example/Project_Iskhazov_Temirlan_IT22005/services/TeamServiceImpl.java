@@ -21,6 +21,7 @@ public class TeamServiceImpl implements TeamService{
         if(myTeam != null)
         {
             User secUser = new User(myTeam.getMail(), myTeam.getPassword(),myTeam.getTypesList());
+            return secUser;
 
         }
         throw new UsernameNotFoundException("User Not Found");

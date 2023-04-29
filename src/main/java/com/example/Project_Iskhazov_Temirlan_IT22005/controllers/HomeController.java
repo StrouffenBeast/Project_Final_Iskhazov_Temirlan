@@ -40,6 +40,12 @@ public class HomeController {
 
     }
 
+    @GetMapping(value = "/profile")
+    public String Profile(Model model){
+        return "profile";
+
+    }
+
 
 
 

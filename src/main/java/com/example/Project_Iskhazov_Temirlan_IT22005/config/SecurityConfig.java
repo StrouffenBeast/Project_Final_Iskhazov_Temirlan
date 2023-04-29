@@ -1,6 +1,7 @@
 package com.example.Project_Iskhazov_Temirlan_IT22005.config;
 
 
+import com.example.Project_Iskhazov_Temirlan_IT22005.services.TeamService;
 import com.example.Project_Iskhazov_Temirlan_IT22005.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -20,6 +21,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private TeamService teamService;
+
     @Bean
     public BCryptPasswordEncoder passwordEncoder(){
         return new BCryptPasswordEncoder();
@@ -27,6 +31,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
             auth.userDetailsService(userService);
+            auth.userDetailsService(teamService);
     }
 
     @Override
@@ -37,8 +42,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
         http.formLogin()
                 .loginPage("/login").permitAll()
-                .usernameParameter("user_email")
-                .passwordParameter("user_password")
+                .usernameParameter("mail_field")
+                .passwordParameter("password_field")
                 .loginProcessingUrl("/auth").permitAll()
                 .failureUrl("/login?error")
                 .defaultSuccessUrl("/profile");

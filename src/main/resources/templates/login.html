@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+>
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -15,11 +16,10 @@
 <div class="main-contain container">
     <div class="" style="margin-top: 100px; margin-left: 300px; margin-right: 300px">
         <form class="card py-5 px-4" th:action="@{'/auth'}" method="POST" style="background-color: cornflowerblue">
-            <h3 style="background-color: red; text-align: center; color: whitesmoke" th:text="${nodata}"></h3>
-            <label>Username</label>
-            <input type="text" name="username_field" />
+            <label>Email:</label>
+            <input type="email" name="mail_field"/>
             <label>Password</label>
-            <input type="password" name="password_field" />
+            <input type="password" name="password_field"/>
             <button type="submit" class="btn btn-dark">SIGN IN</button>
         </form>
     </div>

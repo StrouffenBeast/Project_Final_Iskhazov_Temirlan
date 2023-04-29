@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 
 
 @Service
-public class UserSeviceImpl implements UserService{
+public class UserServiceImpl implements UserService{
 
     @Autowired
     private UsersRepository userRepository;
@@ -21,8 +21,10 @@ public class UserSeviceImpl implements UserService{
         if(myUser != null)
         {
             User secUser = new User(myUser.getMail(), myUser.getPassword(),myUser.getTypesList());
-
+            return secUser;
         }
+
         throw new UsernameNotFoundException("User Not Found");
+
     }
 }
