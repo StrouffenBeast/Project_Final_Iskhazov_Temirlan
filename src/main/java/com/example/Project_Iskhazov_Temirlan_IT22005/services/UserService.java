@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Optional;
 
 public interface UserService extends UserDetailsService {
-    Users getUserByEmail(String mail);
+    Users getUserByMail(String mail);
 
     Optional<Users> getUserById(Long id);
     Users createUser(Users user);

@@ -27,7 +27,14 @@
         <th>About me</th>
         <th></th>
     </tr>
-
+    <td th:text="${currentUser.getMail()}"></td>
+    <td th:text="${currentUser.getPassword()}"></td>
+    <td th:text="${currentUser.getName()}"></td>
+    <td th:text="${currentUser.getSurname()}"></td>
+    <td th:text="${currentUser.getAge()}"></td>
+    <td th:text="${currentUser.gender.getGender()}"></td>
+    <td th:text="${currentUser.getAbout()}"></td>
+    <td><a th:href="@{'/edit_profile/' + ${currentUser.getId()}}" class="btn btn-warning">EDIT</a></td>
 </table>
 </div>
 </body>

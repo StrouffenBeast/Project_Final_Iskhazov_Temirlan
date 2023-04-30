@@ -1,7 +1,6 @@
 package com.example.Project_Iskhazov_Temirlan_IT22005.controllers;
 
-import com.example.Project_Iskhazov_Temirlan_IT22005.entities.Gender;
-import com.example.Project_Iskhazov_Temirlan_IT22005.entities.Users;
+import com.example.Project_Iskhazov_Temirlan_IT22005.entities.*;
 import com.example.Project_Iskhazov_Temirlan_IT22005.services.TeamService;
 import com.example.Project_Iskhazov_Temirlan_IT22005.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +24,8 @@ public class HomeController {
     private TeamService teamService;
     @Autowired
     private UserService userService;
+
+
 
     @GetMapping("/navbar")
     public String Navbar(Model model){
@@ -61,19 +62,19 @@ public class HomeController {
 
     }
 
-    @GetMapping(value = "/profileTeam")
-    public String ProfileTeam(Model model){
-        model.addAttribute("currentUser",getUserData());
-        return "profileTeam";
-
-    }
+//    @GetMapping(value = "/profileTeam")
+//    public String ProfileTeam(Model model){
+//        model.addAttribute("currentUser",getUserData());
+//        return "profileTeam";
+//
+//    }
 
     private Users getUserData(){
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         if(!(authentication instanceof  AnonymousAuthenticationToken))
         {
             User secUser = (User)authentication.getPrincipal();
-            Users myUser = userService.getUserByEmail(secUser.getUsername());
+            Users myUser = userService.getUserByMail(secUser.getUsername());
             return myUser;
 
         }
@@ -133,6 +134,70 @@ public class HomeController {
 
     }
 
+    @GetMapping(value="newMember")
+    public String newMember(Model model){
+        List<Gender> gender_list = userService.getAllGender();
+        error="";
+        return "register";
+    }
+
+    @GetMapping("/profileTeam")
+    public String profileTeam(Model model) {
+        List<Team> teams = teamService.getAllTeam();
+        model.addAttribute("teams", teams);
+
+        List<Games> games = teamService.getAllGames();
+        model.addAttribute("games", games);
+
+        List<Skill> skills = teamService.getAllSkill();
+        model.addAttribute("skills", skills);
+
+        List<Gender> gender = teamService.getAllGender();
+        model.addAttribute("gender", gender);
+
+        model.addAttribute("currentUser", getUserData());
+
+        return "profileTeam";
+    }
+
+
+    @GetMapping(value="/edit_profile/{idshka}")
+    public String profile_details(Model model, @PathVariable(name="idshka") Long user_id){
+
+        List<Gender> gender_list = userService.getAllGender();
+        model.addAttribute("gender_list", gender_list);
+
+        Users user = userService.getUser(user_id);
+        model.addAttribute("currentUser",user);
+        
+        return "edit_profile";
+    }
+
+    @PostMapping("save_profile")
+    public String save_profile(@RequestParam(name = "id") Long id,
+                               @RequestParam(name = "age_field") int age,
+                               @RequestParam(name = "password_field") String password,
+                               @RequestParam(name = "name_field") String name,
+                               @RequestParam(name = "surname_field") String surname,
+                               @RequestParam(name = "about_field") String about,
+                               @RequestParam(name = "gender_field") Long gender_id) {
+
+
+
+
+        Users user = userService.getUser(id);
+
+        Gender gender = userService.getGender(gender_id);
+
+        user.setPassword(password);
+        user.setName(name);
+        user.setSurname(surname);
+        user.setAge(age);
+        user.setGender(gender);
+        user.setAbout(about);
+        userService.saveUser(user);
+        return "redirect:/profile";
+    }
 
 }
 

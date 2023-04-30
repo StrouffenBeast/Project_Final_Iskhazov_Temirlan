@@ -7,13 +7,14 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
-<nav class="navbar navbar-expand-lg navbar-dark" th:fragment="navbar" style="background-color: cornflowerblue">
+<nav class="navbar navbar-expand-lg navbar-dark" th:fragment="navbar" style="background-color: orangered">
   <div class="container-fluid">
     <a class="navbar-brand" href="/" style="color: black">Home</a>
     <a class="nav-link" style="color:white" th:href="@{'/profileTeam'}">Our Team</a>
     <a class="nav-link" style="color:white" th:href="@{'/profile'}" sec:authorize="isAuthenticated()" th:text = "${currentUser.mail}"></a>
     <a class="nav-link" style="color:white" th:href="@{'/login'}" sec:authorize="isAnonymous()">Login</a>
     <a class="nav-link" style="color:white" th:href="@{'/register'}" sec:authorize="isAnonymous()">Registration</a>
+    <a class="nav-link" style="color:white" th:href="@{'/newMember'}" sec:authorize="hasRole('ROLE_ADMIN')">Add new Member</a>
     <a class="nav-link" style="color:white" sec:authorize="isAuthenticated()" href="JavaScript:void(0)" onclick="document.getElementById('logoutFormId').submit()">Logout</a>
     <form th:action="@{'/logout'}" method="post" id="logoutFormId" sec:authorize="isAuthenticated()"></form>
   </div>

@@ -16,26 +16,18 @@
 
 
 <table class="table table-striped">
+  <h1 display-1 text-center>Welcome <span th:text = "${currentUser.name}"></span></h1>
   <tr>
-    <th>Name:</th>
-    <th>Surname:</th>
-    <th>Age:</th>
-    <th>Length of Service:</th>
-    <th>Games:</th>
-    <th>Skills:</th>
-    <th>About:</th>
+    <th>Email</th>
+    <th>Password</th>
+    <th>Name</th>
+    <th>Surname</th>
+    <th>Age</th>
     <th>Gender</th>
+    <th>About me</th>
+    <th></th>
   </tr>
-  <tr th:each="team : ${teams}">
-    <td th:text="${team.name}"></td>
-    <td th:text="${team.surname}"></td>
-    <td th:text="${team.age}"></td>
-    <td th:text="${team.lengthOfService}"></td>
-    <td th:text="${team.about}"></td>
-    <td th:text="${team.games.name}"></td>
-    <td th:text="${team.skill.getSkill()}"></td>
-    <td th:text="${team.gender.getGender()}"></td>
-  </tr>
+
 </table>
 </div>
 </body>
