@@ -40,8 +40,8 @@ public class Users {
     private String about;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    private IsMember isMember;
+    private Gender gender;
 
     @ManyToMany(fetch = FetchType.EAGER)
-    private List<Types> typesList;
+    private List<Roles> rolesList;
 }

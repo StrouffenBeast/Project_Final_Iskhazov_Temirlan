@@ -21,9 +21,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     private UserService userService;
 
-    @Autowired
-    private TeamService teamService;
-
     @Bean
     public BCryptPasswordEncoder passwordEncoder(){
         return new BCryptPasswordEncoder();
@@ -31,7 +28,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
             auth.userDetailsService(userService);
-            auth.userDetailsService(teamService);
+
     }
 
     @Override

@@ -43,14 +43,12 @@ public class Team {
     private String about;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    private IsMember isMember;
+    private Games games;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    private Games games;
+    private Gender gender;
 
     @ManyToOne(fetch = FetchType.EAGER)
     private Skill skill;
 
-    @ManyToMany(fetch = FetchType.EAGER)
-    private List<Types> typesList;
 }
